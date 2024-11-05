@@ -1,0 +1,46 @@
+/* Custom CSS for border animation */
+.border-animation-container {
+  position: relative;
+}
+
+.border-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid red;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 1;
+  pointer-events: none; /* Make sure it doesn't interfere with other events */
+}
+
+.border-animation-container:hover .border-animation {
+  opacity: 1;
+  animation: border-draw 1s forwards ease-in-out;
+}
+
+@keyframes border-draw {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  50% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+  }
+  75% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* Glowing effect on hover */
+.border-animation-container:hover img {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease-in-out;
+}

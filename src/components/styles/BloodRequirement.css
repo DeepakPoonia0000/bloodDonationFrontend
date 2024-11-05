@@ -1,0 +1,71 @@
+.blood-request-form {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-label {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-input::placeholder {
+    color: #aaa;
+  }
+  
+  .form-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    color: #28a745;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  .user-Requests{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 550px));
+    gap: 15px;
+  }
+
+  .user-Requests .requests{
+    border: 0.3px solid black;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow: hidden;
+  }
+  
+  .links-decorations{
+    text-decoration: none;
+    color:black;
+  }

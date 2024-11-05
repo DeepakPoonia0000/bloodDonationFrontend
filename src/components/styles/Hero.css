@@ -1,0 +1,155 @@
+Hero.css .hero-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-container a {
+    color: black;
+    text-decoration: none;
+}
+
+.hero-container a:hover {
+    text-decoration:none;
+}
+
+.hero-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.hero-container button:hover {
+    background-color: #0056b3;
+}
+
+.hero-container .donater-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 550px));
+
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.hero-container .donater-grid li {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.hero-container .donater-grid li:hover {
+    transform: scale(1.05);
+}
+
+/* Blood drop animation */
+.hero-container .donater-grid li:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 130px;
+    height: 180px;
+    background-image: url('https://oneblood.scene7.com/is/image/oneblood/About-blood-drop?ts=1701100554337&$BRBangle$&dpr=off');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateX(-50%);
+    opacity: 0.7;
+    transition: top 0.6s ease, opacity 0.6s ease;
+    /* Animate coming down */
+}
+
+/* Blood drop starts hidden and moves back up when not hovered */
+.hero-container .donater-grid li::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: -50px;
+    /* Start above the card */
+    left: 50%;
+    width: 130px;
+    height: 180px;
+    background-image: url('https://oneblood.scene7.com/is/image/oneblood/About-blood-drop?ts=1701100554337&$BRBangle$&dpr=off');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateX(-50%);
+    opacity: 0;
+    /* Hidden initially */
+    transition: top 0.6s ease, opacity 0.6s ease;
+    /* Animate going back up */
+}
+
+.hero-container .donater-grid p {
+    margin: 10px 0;
+}
+
+.hero-container .donater-grid p a {
+    color:#007bff;
+    text-decoration:none;
+}
+
+.hero-container .donater-grid p a:hover {
+    text-decoration:underline;
+}
+
+.motivational-wrapper {
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
+.dropdown-card {
+    width: 60%;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dropdown-toggle {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-toggle:hover {
+    background-color: #ddd;
+}
+
+.dropdown-content {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+ul{
+    list-style: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

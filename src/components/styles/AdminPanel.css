@@ -1,0 +1,17 @@
+.admin-registeredUsers{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.admin-registeredUsers li{
+    border: 2px solid black;
+    /* height: 150px; */
+}
+
+.admin-registeredUsers a{
+    color: black;
+    text-decoration: none;
+}
