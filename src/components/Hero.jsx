@@ -80,7 +80,7 @@ const Hero = ({ setToken }) => {
       <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 items-center justify-between">
 
         {/* Accordion for Info Sections */}
-        <div className=' ml-2 mr-2 mt-2'>
+        <div className=' ml-10 mr-2 mt-2'>
           <Accordion defaultActiveKey="0">
             {/* Section 1: Eligibility */}
             <Accordion.Item eventKey="0">
