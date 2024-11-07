@@ -36,6 +36,14 @@ const AdminManageUsers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);  // Control modal visibility
   const [selectedId, setSelectedId] = useState(null);     // Store selected user/hospital ID
   const [deleteType, setDeleteType] = useState('');       // Either 'user' or 'hospital'
+  const [userSearch, setUserSearch] = useState(''); // Search field for users
+  const [hospitalSearch, setHospitalSearch] = useState(''); // Search field for hospitals
+  const [selectedField, setSelectedField] = useState("bloodRequest");
+
+  // Function to handle label click
+  const handleLabelClick = (field) => {
+    setSelectedField(field);
+  };
 
   const token = localStorage.getItem('adminToken');
 
@@ -53,6 +61,17 @@ const AdminManageUsers = () => {
       console.error('Request failed:', error);
     }
   };
+
+  const filteredUsers = registeredUsers.filter(user =>
+    user.bloodGroup.toLowerCase().includes(userSearch.toLowerCase()) ||
+    user.phoneNumber.includes(userSearch)
+  );
+
+  const filteredHospitals = registeredHospital.filter(hospital =>
+    hospital.name.toLowerCase().includes(hospitalSearch.toLowerCase()) ||
+    hospital.contact.phone.includes(hospitalSearch)
+  );
+
 
   // Function to trigger modal
   const triggerDelete = (id, type) => {
@@ -95,7 +114,23 @@ const AdminManageUsers = () => {
         onCancel={() => setIsModalOpen(false)}
       />
 
-      {/* Registered Users Section */}
+      <div className="flex space-x-4 mb-4 justify-center">
+        <button
+          onClick={() => handleLabelClick("Users")}
+          className="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition duration-300 shadow-lg">
+          Users
+        </button>
+
+        <button
+          onClick={() => handleLabelClick("Hospitals")}
+          className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 shadow-lg">
+          Hospitals
+        </button>
+      </div>
+
+
+
+      {/* Registered Users Section
       <section className="mb-8">
         <h3 className="text-lg font-semibold mb-4 text-red-700">Registered Users</h3>
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -114,9 +149,44 @@ const AdminManageUsers = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Registered Hospitals Section */}
+      {/* Registered Users Section */}
+      {selectedField === "Users" && (
+        <section className="mb-8">
+          <h3 className="text-2xl font-semibold mb-4 text-red-700">Registered Users -  {filteredUsers.length}</h3>
+
+          {/* User Search Field */}
+          <input
+            type="text"
+            placeholder="Search by Blood Group or Phone"
+            className="w-full p-2 mb-6 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-red-200"
+            value={userSearch}
+            onChange={(e) => setUserSearch(e.target.value)}
+          />
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {filteredUsers.map((user) => (
+              <div key={user._id} className="w-full sm:w-1/2 lg:w-1/3 bg-white shadow-lg rounded-lg p-4 border border-red-200 hover:bg-gray-100 transition relative">
+                <p><strong>ID:</strong> {user._id}</p>
+                <p><strong>Blood Group:</strong> {user.bloodGroup}</p>
+                <p><strong>Joined:</strong> {new Date(user.joinedOn).toLocaleDateString()}</p>
+                <p><strong>Phone:</strong> {user.phoneNumber}</p>
+                <button
+                  onClick={() => triggerDelete(user._id, 'user')}
+                  className="mt-4 text-white bg-red-600 hover:bg-red-700 transition-colors px-4 py-2 rounded-lg"
+                >
+                  Delete User
+                </button>
+              </div>
+            ))}
+          </div>
+
+        </section>
+      )};
+
+
+      {/* Registered Hospitals Section
       <section>
         <h3 className="text-lg font-semibold mb-4 text-red-700">Registered Hospitals</h3>
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -135,7 +205,40 @@ const AdminManageUsers = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
+
+      {/* Registered Hospitals Section */}
+      {selectedField === "Hospitals" && (
+        <section>
+          <h3 className="text-2xl font-semibold mb-4 text-red-700">Registered Hospitals - { filteredHospitals.length}</h3>
+
+          {/* Hospital Search Field */}
+          <input
+            type="text"
+            placeholder="Search by Name or Phone"
+            className="w-full p-2 mb-6 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-red-200"
+            value={hospitalSearch}
+            onChange={(e) => setHospitalSearch(e.target.value)}
+          />
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {filteredHospitals.map((hospital) => (
+              <div key={hospital._id} className="w-full sm:w-1/2 lg:w-1/3 bg-white shadow-lg rounded-lg p-4 border border-red-200 hover:bg-gray-100 transition relative">
+                <p><strong>Name:</strong> {hospital.name}</p>
+                <p><strong>ID:</strong> {hospital._id}</p>
+                <p><strong>Joined:</strong> {new Date(hospital.joinedOn).toLocaleDateString()}</p>
+                <p><strong>Phone:</strong> {hospital.contact.phone}</p>
+                <button
+                  onClick={() => triggerDelete(hospital._id, 'hospital')}
+                  className="mt-4 text-white bg-red-600 hover:bg-red-700 transition-colors px-4 py-2 rounded-lg"
+                >
+                  Delete Hospital
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

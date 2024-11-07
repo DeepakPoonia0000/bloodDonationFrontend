@@ -99,7 +99,7 @@ function AdminPanel({ setAdminToken }) {
     }
   }
 
-  // filtered function 
+  // filtered function
   const filteredPendingUsers = pendingUsers.filter(user =>
     user.phoneNumber.includes(filter)
   );
@@ -119,7 +119,6 @@ function AdminPanel({ setAdminToken }) {
   const filteredRegisteredHospital = registeredHospital.filter(hospital =>
     hospital.contact.phone.includes(filter)
   );
-
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -141,11 +140,47 @@ function AdminPanel({ setAdminToken }) {
 
       {/* Toggle Buttons */}
       <div className="flex items-center justify-center  gap-4 p-4">
-        <button onClick={() => setShowPendingUsers(!showPendingUsers)} className="btn-toggle flex items-center border-2 p-3 rounded-full bg-red-500 text-white"> <FaUsers className="mr-2" /> Pending Users</button>
-        <button onClick={() => setShowUnverifiedUsers(!showUnverifiedUsers)} className="btn-toggle flex items-center border-2 p-3 rounded-full bg-red-500 text-white"> <FaUsers className="mr-2" /> Unverified Users</button>
-        <button onClick={() => setShowRegisteredUsers(!showRegisteredUsers)} className="btn-toggle flex items-center border-2 p-3 rounded-full bg-red-500 text-white"> <FaUsers className="mr-2" />Registered Users</button>
-        <button onClick={() => setShowPendingHospital(!showPendingHospital)} className="btn-toggle flex items-center border-2 p-3 rounded-full bg-red-500 text-white"><FaHospital className="mr-2" /> Pending Hospitals</button>
-        <button onClick={() => setShowRegisteredHospital(!showRegisteredHospital)} className="btn-toggle flex items-center border-2 p-3 rounded-full bg-red-500 text-white"> <FaHospital className="mr-2" /> Registered Hospitals</button>
+        <button
+          onClick={() => setShowPendingUsers(!showPendingUsers)}
+          className={`btn-toggle flex items-center border-2 p-3 rounded-full text-white transition-colors ${showPendingUsers ? 'bg-green-600' : 'bg-red-500'
+            }`}
+        >
+          <FaUsers className="mr-2" />
+          Pending Users
+        </button>
+
+        <button
+          onClick={() => setShowUnverifiedUsers(!showUnverifiedUsers)}
+          className={`btn-toggle flex items-center border-2 p-3 rounded-full text-white transition-colors ${showUnverifiedUsers ? 'bg-green-600' : 'bg-red-500'
+            }`}
+        >
+          <FaUsers className="mr-2" /> Unverified Users
+        </button>
+
+        <button
+          onClick={() => setShowRegisteredUsers(!showRegisteredUsers)}
+          className={`btn-toggle flex items-center border-2 p-3 rounded-full text-white transition-colors ${showRegisteredUsers ? 'bg-green-600' : 'bg-red-500'
+            }`}
+        >
+          <FaUsers className="mr-2" /> Registered Users
+        </button>
+
+        <button
+          onClick={() => setShowPendingHospital(!showPendingHospital)}
+          className={`btn-toggle flex items-center border-2 p-3 rounded-full text-white transition-colors ${showPendingHospital ? 'bg-green-600' : 'bg-red-500'
+            }`}
+        >
+          <FaHospital className="mr-2" /> Pending Hospitals
+        </button>
+
+        <button
+          onClick={() => setShowRegisteredHospital(!showRegisteredHospital)}
+          className={`btn-toggle flex items-center border-2 p-3 rounded-full text-white transition-colors ${showRegisteredHospital ? 'bg-green-600' : 'bg-red-500'
+            }`}
+        >
+          <FaHospital className="mr-2" /> Registered Hospitals
+        </button>
+        
       </div>
 
       {/* Main content */}
@@ -153,7 +188,7 @@ function AdminPanel({ setAdminToken }) {
         {/* Pending Users */}
         {showPendingUsers && <section className="mb-8">
           <h3 className="text-lg font-semibold mb-4 text-red-700">Pending User Requests</h3>
-          {pendingUsers.length === 0 ? (
+          {filteredPendingUsers.length === 0 ? (
             <p className="text-gray-500">No pending requests.</p>
           ) : (
             <ul className="space-y-4">
@@ -183,11 +218,11 @@ function AdminPanel({ setAdminToken }) {
         {/* unverified user  */}
         {showUnverifiedUsers && <section className="mb-8">
           <h3 className="text-lg font-semibold mb-4 text-red-700">Unverified User</h3>
-          {/* {notVerifiedUsers.length === 0 ? (
+          {filteredNotVerifiedUsers.length === 0 ? (
             <p className="text-gray-500">No a single user find unverified.</p>
           ) : (
             <ul className="space-y-4">
-              {notVerifiedUsers.map((user) => (
+              {filteredNotVerifiedUsers.map((user) => (
                 <li key={user._id} className="bg-white shadow-lg rounded-lg p-4 flex flex-wrap justify-between items-center border border-red-200">
                   <p className="text-gray-700 font-medium">Phone: {user.phoneNumber}</p>
                   <div className="flex gap-2">
@@ -207,7 +242,7 @@ function AdminPanel({ setAdminToken }) {
                 </li>
               ))}
             </ul>
-          )} */}
+          )}
         </section>}
 
 
@@ -218,7 +253,7 @@ function AdminPanel({ setAdminToken }) {
             Registered Users
           </h3>
           <div className="flex flex-wrap gap-4 justify-center">
-            {registeredUsers.map((user) => (
+            {filteredRegisteredUsers.map((user) => (
               <Link
                 to={`/userDetails?userId=${user._id}`}
                 key={user._id}
@@ -247,11 +282,11 @@ function AdminPanel({ setAdminToken }) {
         {/* Pending Hospital Requests */}
         {showPendingHospital && <section className="  lg:block flex flex-col items-center mb-8">
           <h3 className="text-lg font-semibold mb-4 text-red-700">Pending Hospital/Organizations Requests</h3>
-          {pendingHospital.length === 0 ? (
+          {filteredPendingHospital.length === 0 ? (
             <p className="text-gray-500">No pending requests.</p>
           ) : (
             <ul className="space-y-4">
-              {pendingHospital.map((hospital) => (
+              {filteredPendingHospital.map((hospital) => (
                 <li key={hospital._id} className="bg-white shadow-lg rounded-lg p-4 flex flex-wrap justify-between items-start border border-red-200">
                   <div className="w-full md:w-auto">
                     <p><strong>Name:</strong> {hospital.name}</p>
@@ -287,7 +322,7 @@ function AdminPanel({ setAdminToken }) {
             Registered Hospitals/Organizations
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            {registeredHospital.map((hospital) => (
+            {filteredRegisteredHospital.map((hospital) => (
               <Link
                 to={`/hospitalDetails?userId=${hospital._id}`}
                 key={hospital._id}
