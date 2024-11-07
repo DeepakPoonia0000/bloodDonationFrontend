@@ -107,7 +107,7 @@ const DonationDetails = ({ setToken }) => {
             // Show the message returned from the server
             const message = response.data.message;
             console.log(message)
-            window.alert(`${message} ,  ${response.data.previousDonationDate}`);
+            window.alert(`${message}`);
 
             // Clear input fields after successful submission
             setName('');

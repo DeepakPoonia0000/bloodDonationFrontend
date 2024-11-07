@@ -51,7 +51,8 @@ const UploadeDonationPhoto = () => {
                     authorization:token,
                 },
             }).then(()=>{
-                toast.success("images uploaded  successfully");
+                toast.success("images uploaded successfully");
+                setImage(null);
             }).catch((err)=> {
                 console.log(err);
                 toast.error("Error uploading image");
